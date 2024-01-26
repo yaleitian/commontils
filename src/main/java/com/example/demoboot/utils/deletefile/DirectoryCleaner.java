@@ -6,12 +6,15 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class DirectoryCleaner {
+    private static final Logger LOGGER = Logger.getLogger(DirectoryCleanerMaven.class.getName());
 
     public static void main(String[] args) {
         // 指定的起始目录
-        File directory = new File("/Users/tianyalei/Desktop/audit2/risk-single");
+        File directory = new File("/Users/tianyalei/Desktop/audit/risk-single");
         cleanDirectory(directory);
     }
 
@@ -53,10 +56,10 @@ public class DirectoryCleaner {
             }
             BasicFileAttributes attrs = Files.readAttributes(file.toPath(), BasicFileAttributes.class);
             LocalDate lastModified = attrs.lastModifiedTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            LocalDate cutoffDate = LocalDate.of(2023, 12, 6); // 指定日期
+            LocalDate cutoffDate = LocalDate.of(2023, 11, 10); // 指定日期
             return lastModified.isAfter(cutoffDate) || lastModified.isEqual(cutoffDate);
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Failed to set up logger FileHandler", e);
             return false;
         }
     }
