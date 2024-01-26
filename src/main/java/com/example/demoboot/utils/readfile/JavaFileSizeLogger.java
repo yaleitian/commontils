@@ -13,7 +13,7 @@ import java.util.logging.SimpleFormatter;
 
 public class JavaFileSizeLogger {
     private static final Logger LOGGER = Logger.getLogger(JavaFileSizeLogger.class.getName());
-    private static List<File> javaFiles = new ArrayList<>();
+    private final List<File> javaFiles = new ArrayList<>(); // 将 javaFiles 声明为 final
 
     public JavaFileSizeLogger() {
         try {
