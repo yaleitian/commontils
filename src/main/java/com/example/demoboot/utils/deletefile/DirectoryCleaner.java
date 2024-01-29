@@ -56,7 +56,7 @@ public class DirectoryCleaner {
             }
             BasicFileAttributes attrs = Files.readAttributes(file.toPath(), BasicFileAttributes.class);
             LocalDate lastModified = attrs.lastModifiedTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            LocalDate cutoffDate = LocalDate.of(2023, 11, 10); // 指定日期
+            LocalDate cutoffDate = LocalDate.of(2023, 10, 16); // 指定日期
             return lastModified.isAfter(cutoffDate) || lastModified.isEqual(cutoffDate);
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, "Failed to set up logger FileHandler", e);
